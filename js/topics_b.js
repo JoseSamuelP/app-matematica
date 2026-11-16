@@ -79,8 +79,8 @@ const poli_mult = {
         return {
           q: `Multiplica: ${M(`${k === 1 ? '' : k === -1 ? '-' : k}x(${b}x${c < 0 ? '' : '+'}${c})`)}`, ans: expr(poly(R), { form: ['expanded'] }),
           traps: [T(poly([k * b, 0, c]), 'dist_inc', `El ${S(k)}x multiplica a <b>cada</b> término del paréntesis.`)],
-          steps: [{ note: `${S(k)}x · ${b}x = ${M(`${k * b}x^2`)}` }, { note: `${S(k)}x · (${S(c)}) = ${M(`${k * c}x`)}` }, { html: M(poly(R)) }],
-          viz: V.areaModel([M(`${k}x`)], [M(`${b}x`), M(`${c}`)], [[M(`${k * b}x^2`), M(`${k * c}x`)]]),
+          steps: [{ note: `${M(poly([k, 0]))} · ${M(poly([b, 0]))} = ${M(poly([k * b, 0, 0]))}` }, { note: `${M(poly([k, 0]))} · (${S(c)}) = ${M(poly([k * c, 0]))}` }, { html: M(poly(R)) }],
+          viz: V.areaModel([M(poly([k, 0]))], [M(poly([b, 0])), M(`${c}`)], [[M(poly([k * b, 0, 0])), M(poly([k * c, 0]))]]),
         };
       },
     },
@@ -98,11 +98,10 @@ const poli_mult = {
             T(poly([1, -(a + b), a * b]), 'signo_suma', 'Revisa el signo del término del medio.'),
           ],
           steps: [
-            { html: V.areaModel([M('x'), M(`${a}`)], [M('x'), M(`${b}`)], [[M('x^2'), M(`${b}x`)], [M(`${a}x`), M(`${a * b}`)]]), note: 'Cada pedazo es una multiplicación.' },
+            { html: V.areaModel([M('x'), M(`${a}`)], [M('x'), M(`${b}`)], [[M('x^2'), M(poly([b, 0]))], [M(poly([a, 0])), M(`${a * b}`)]]), note: 'Cada pedazo es una multiplicación.' },
             { html: M(`x^2${b < 0 ? '' : '+'}${b}x${a < 0 ? '' : '+'}${a}x${a * b < 0 ? '' : '+'}${a * b}`), note: 'Suma los 4 pedazos.' },
-            { html: M(poly(R)), note: `Junta los del medio: ${S(a)} + ${S(b)} = ${S(a + b)}` },
+            { html: M(poly(R)), note: `Junta los del medio: (${S(a)}) + (${S(b)}) = ${S(a + b)}` },
           ],
-          viz: V.areaModel([M('x'), M(`${a}`)], [M('x'), M(`${b}`)], [[M('x^2'), M(`${b}x`)], [M(`${a}x`), M(`${a * b}`)]]),
         };
       },
     },
@@ -114,7 +113,7 @@ const poli_mult = {
         return {
           q: `Multiplica: ${M(`(${L(a, b)})(${L(c, d)})`)}`, ans: expr(poly(R), { form: ['expanded', 'reduced'] }),
           traps: [T(poly([a * c, 0, b * d]), 'dist_inc', 'Faltan los productos cruzados (los del medio).'), T(poly([a + c, b + d]), 'prod_suma', 'Se multiplican, no se suman.')],
-          steps: [{ html: V.areaModel([M(`${a}x`), M(`${b}`)], [M(`${c}x`), M(`${d}`)], [[M(`${a * c}x^2`), M(`${a * d}x`)], [M(`${b * c}x`), M(`${b * d}`)]]) }, { html: M(poly(R)), note: `Medio: ${S(a * d)} + ${S(b * c)} = ${S(a * d + b * c)}` }],
+          steps: [{ html: V.areaModel([M(poly([a, 0])), M(`${b}`)], [M(poly([c, 0])), M(`${d}`)], [[M(poly([a * c, 0, 0])), M(poly([a * d, 0]))], [M(poly([b * c, 0])), M(`${b * d}`)]]) }, { html: M(poly(R)), note: `Medio: ${S(a * d)} + ${S(b * c)} = ${S(a * d + b * c)}` }],
         };
       },
     },
@@ -146,7 +145,7 @@ const prod_notables = {
             T(poly([1, -2 * a, a * a]), 'signo_mult', 'Revisa el signo del término del medio.'),
           ],
           steps: [
-            { html: V.areaModel([M('x'), M(`${a}`)], [M('x'), M(`${a}`)], [[M('x^2'), M(`${a}x`)], [M(`${a}x`), M(`${a * a}`)]]), note: 'Es un cuadrado: 4 pedazos.' },
+            { html: V.areaModel([M('x'), M(`${a}`)], [M('x'), M(`${a}`)], [[M('x^2'), M(poly([a, 0]))], [M(poly([a, 0])), M(`${a * a}`)]]), note: 'Es un cuadrado: 4 pedazos.' },
             { note: `x² + 2·(x)·(${S(a)}) + (${S(a)})²` },
             { html: M(poly(R)) },
           ],
@@ -173,7 +172,7 @@ const prod_notables = {
         return {
           q: `Multiplica: ${M(`(${L(k, a)})(${L(k, -a)})`)}`, ans: expr(poly(R), { form: ['expanded', 'reduced'] }),
           traps: [T(poly([k * k, 0, a * a]), 'dif_cuad', `${S(a)}·(${S(-a)}) = ${S(-a * a)}: el último término es <b>negativo</b>.`), T(poly([k * k, -2 * k * a, -a * a]), 'dif_cuad', 'Los términos del medio se cancelan: +' + k * a + 'x − ' + k * a + 'x = 0.')],
-          steps: [{ html: V.areaModel([M(`${k}x`), M(`${a}`)], [M(`${k}x`), M(`${-a}`)], [[M(`${k * k}x^2`), M(`${-k * a}x`)], [M(`${k * a}x`), M(`${-a * a}`)]]), note: 'Los del medio se anulan.' }, { html: M(poly(R)), note: 'Suma por diferencia = diferencia de cuadrados.' }],
+          steps: [{ html: V.areaModel([M(poly([k, 0])), M(`${a}`)], [M(poly([k, 0])), M(`${-a}`)], [[M(poly([k * k, 0, 0])), M(poly([-k * a, 0]))], [M(poly([k * a, 0])), M(`${-a * a}`)]]), note: 'Los del medio se anulan: ' + M(poly([-k * a, 0])) + ' y ' + M(poly([k * a, 0])) }, { html: M(poly(R)), note: 'Suma por diferencia = diferencia de cuadrados.' }],
         };
       },
     },
@@ -225,7 +224,7 @@ const factor_comun = {
 function aspaViz(a, c, m, n, b) {
   // a x² + b x + c = (p x + m)(q x + n) con a=p*q (aquí p=q=1 o p=a,q=1)
   return `<div class="aspa"><div><span>${M(a === 1 ? 'x' : `${a}x`)}</span><span>${M(`${m}`)}</span></div><div class="aspa-x">✕</div><div><span>${M('x')}</span><span>${M(`${n}`)}</span></div>
-  <div class="aspa-n">Cruzado: ${a === 1 ? '' : a}x·(${S(n)}) + x·(${S(m)}) = ${M(`${a * n + m}x`)} ${a * n + m === b ? '✓' : '✗'}</div></div>`;
+  <div class="aspa-n">Cruzado: ${a === 1 ? '' : a}x·(${S(n)}) + x·(${S(m)}) = ${M(poly([a * n + m, 0]))} ${a * n + m === b ? '✓' : '✗'}</div></div>`;
 }
 const aspa_simple = {
   id: 'aspa_simple', name: 'Factorizar: aspa simple', icon: '✕', mode: 'lapiz', unit: 'C1',
@@ -246,7 +245,7 @@ const aspa_simple = {
         return {
           q: `Factoriza: ${M(poly([1, b, c]))}`, ans: expr(`(${L(1, m)})(${L(1, n)})`, { form: ['factored'] }),
           traps: [T(`(${L(1, -m)})(${L(1, -n)})`, 'aspa', `Revisa los signos: (${S(-m)})+(${S(-n)}) = ${S(-b)}, pero necesitas ${S(b)}.`), T(m !== n ? `(${L(1, m)})(${L(1, -n)})` : null, 'aspa', 'Multiplica para comprobar: el último término no coincide.')],
-          steps: [{ note: `Dos números que multiplicados den <b>${S(c)}</b> y sumados den <b>${S(b)}</b>.` }, { note: `Son <b>${S(m)}</b> y <b>${S(n)}</b>: ${S(m)}·${S(n)} = ${S(c)}, ${S(m)}+${S(n)} = ${S(b)}` }, { html: aspaViz(1, c, m, n, b) }, { html: M(`(${L(1, m)})(${L(1, n)})`) }],
+          steps: [{ note: `Dos números que multiplicados den <b>${S(c)}</b> y sumados den <b>${S(b)}</b>.` }, { note: `Son <b>${S(m)}</b> y <b>${S(n)}</b>: (${S(m)})·(${S(n)}) = ${S(c)} y (${S(m)}) + (${S(n)}) = ${S(b)}` }, { html: aspaViz(1, c, m, n, b) }, { html: M(`(${L(1, m)})(${L(1, n)})`) }],
         };
       },
     },
@@ -451,7 +450,7 @@ const ec_lineales = {
           q: `Resuelve: ${M(`${poly([a, b])}=${poly([c, d])}`)}`, ans: sol(x),
           traps: [
             T(new Q(d + b, a - c), 'transpos', `Pasaste el ${S(b)} sin cambiarle el signo. Al pasar al otro lado, <b>${S(b)} se vuelve ${S(-b)}</b>.`, `${M(`${a - c}x=${d}${b < 0 ? '' : '+'}${b}`)} ✗`),
-            T(a + c !== 0 ? new Q(d - b, a + c) : null, 'transpos', `La ${M(`${c}x`)} pasa al otro lado con el signo <b>cambiado</b>.`),
+            T(a + c !== 0 ? new Q(d - b, a + c) : null, 'transpos', `La ${M(poly([c, 0]))} pasa al otro lado con el signo <b>cambiado</b>.`),
             T(new Q(b - d, a - c), 'transpos', 'Revisa los signos al pasar los términos.'),
           ],
           steps: balSteps(a, b, c, d),
@@ -610,8 +609,10 @@ const regla_tres = {
       id: 'inversa', w: 4, errs: ['r3_inversa'], ctx: true,
       gen() {
         const k = pick([0, 1, 2]);
-        const a = ri(2, 12), b = ri(2, 20), c = ri(2, 15); if (a === c) return this.gen();
-        const r = new Q(a * b, c);
+        const a = ri(2, 12), b = ri(2, 20);
+        const cs = []; for (let c = 2; c <= 16; c++) if (c !== a && (a * b * 2) % c === 0) cs.push(c);
+        if (!cs.length) return this.gen();
+        const c = pick(cs); const r = new Q(a * b, c);
         const [h1, h2, txt] = [
           ['Obreros', 'Días', `${a} obreros construyen un muro en ${b} días. ¿En cuántos días lo harían ${c} obreros (al mismo ritmo)?`],
           ['Velocidad (km/h)', 'Horas', `A ${a * 10} km/h un bus llega en ${b} horas. ¿En cuántas horas llegaría a ${c * 10} km/h?`],

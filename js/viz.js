@@ -21,6 +21,7 @@ export function numberLine({ start, moves = [], from, to, title }) {
   s += `<line x1="${pad - 6}" y1="${H}" x2="${W - pad + 6}" y2="${H}" stroke="${C.mute}" stroke-width="2"/>`;
   for (let v = Math.ceil(lo); v <= hi; v++) {
     const big = v % step === 0;
+    if (!big && hi - lo > 30) continue;
     s += `<line x1="${x(v)}" y1="${H - (big ? 6 : 3)}" x2="${x(v)}" y2="${H + (big ? 6 : 3)}" stroke="${v === 0 ? C.ink : C.mute}" stroke-width="${v === 0 ? 2 : 1}"/>`;
     if (big) s += `<text x="${x(v)}" y="${H + 20}" text-anchor="middle" font-size="11" fill="${v === 0 ? C.ink : C.mute}">${fmt(v)}</text>`;
   }
@@ -85,7 +86,6 @@ export function fracBar(n, d, color = C.acc, label = true) {
   return s + '</svg>';
 }
 export function fracAddViz(a, b, c, d, sub = false) {
-  const L = (a * d) / (b * d), m = b * d / gcdv(b, d) ;
   const lcm = (b * d) / gcdv(b, d);
   const A = a * (lcm / b), B = c * (lcm / d);
   return `<div class="fviz">
@@ -93,7 +93,6 @@ export function fracAddViz(a, b, c, d, sub = false) {
     <div class="viz-t">2) Cortamos todo en partes iguales: ${lcm}</div>${fracBar(A, lcm, C.blue)}${fracBar(B, lcm, C.amber)}
     <div class="viz-t">3) Ahora sí se ${sub ? 'restan' : 'suman'} las partes: ${A} ${sub ? '−' : '+'} ${B} = ${sub ? A - B : A + B}</div>${fracBar(Math.max(0, sub ? A - B : A + B), lcm, C.acc)}
   </div>`.replace(/\n\s*/g, '');
-  void L; void m;
 }
 function gcdv(a, b) { a = Math.abs(a); b = Math.abs(b); while (b) [a, b] = [b, a % b]; return a; }
 

@@ -101,13 +101,16 @@ Luego seguir el sílabo: factorización, sistemas, cuadráticas, intervalos, ine
 - **Marcador de seguridad** (seguro / dudé / no sé) en cada ejercicio, igual que en el diagnóstico, para detectar falsa seguridad.
 - **Modo repaso por evaluación** (Control 1, PC1, Parcial, Control 2, PC2, Final) según el calendario.
 - **Panel de progreso** por tema.
-- Entrada de respuestas: **pendiente de decidir** (escribir vs. opciones; posible teclado matemático propio para exponentes y fracciones).
+- Entrada de respuestas: **decidido (16 nov)**: escritura con teclado matemático propio tipo Photomath (fracciones apiladas, exponentes, raíces) + opción múltiple solo en preguntas rápidas de razonamiento.
 
-## 7. Decisiones pendientes (preguntar al usuario)
+## 7. Decisiones tomadas (16 nov 2026)
 
-- ¿Solo Matemática o también Comunicación (tildes, puntuación, conectores, comprensión lectora)?
-- ¿Respuesta escrita, opción múltiple o mixta?
-- Dónde alojarla / cómo abrirla en el celular (artefacto publicado de Claude, GitHub Pages, etc.).
+- **Solo Matemática** por ahora ("que todo sea de matemática"). Comunicación queda para el futuro.
+- **Respuesta escrita** con teclado matemático propio; quiere poder escribir el problema completo (como Photomath), no solo el resultado.
+- **Alojamiento: GitHub Pages**, fácil de instalar (sin descargar ni extraer nada). Uso principal: **celular**.
+- **Ritmo: 1 mes intensivo** para cubrir el curso; luego profundizar.
+- **Metas**: barra diaria + aprobar 1 tema al día; si no aprueba, sigue hasta aprobarlo. Metas cortas pero exigentes.
+- Quiere **muchos ejercicios de razonamiento sin lápiz** (para el tren/bus), otros con lápiz, problemas ilustrados (geometría, álgebra, aritmética), correcciones **gráficas** (no solo texto), **modo oscuro**, **sin internet**, y retroalimentación sobre cómo aprende.
 
 ## 8. Contexto de Comunicación (para una futura versión)
 
@@ -118,3 +121,11 @@ No hay sílabo publicado aún. La evaluación diagnóstica (50 preguntas) cubre:
 - Mensajes al usuario en español, claros y sin jerga técnica innecesaria.
 - Cada actualización: registrar en `CHANGELOG.md` qué cambió y por qué.
 - Cuando el usuario reporte nuevos resultados (controles, prácticas), actualizar la sección 4 y ajustar los niveles de la app.
+
+## 10. Estado de la app (v1.0, 16 nov 2026)
+
+Ver `README.md` (estructura) y `CHANGELOG.md` (historial). Puntos clave para seguir trabajando:
+- Ruta de temas y fechas de evaluaciones: `js/engine.js` (`PATH`, `EXAMS`; Control 1 asumido el 20 nov, ajustar si el usuario da la fecha real).
+- Cada tema = `{id, name, mode, unit, lesson(), variants:[{id, w, errs, gen()}]}` en `js/topics_*.js`. `gen()` devuelve `{q, ans, traps, steps, viz}`; las `traps` son los errores típicos de la sección 4.
+- Al agregar un tema: añadirlo a `PATH`, a `sw.js` si es un archivo nuevo, y correr `node tests/generators.test.mjs`.
+- Subir `CACHE` en `sw.js` en cada actualización.

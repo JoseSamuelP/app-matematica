@@ -481,7 +481,7 @@ const pot_potencia = {
     {
       id: 'combo', w: 2, errs: ['pot_pot', 'prod_pot'], mode: 'lapiz',
       gen() {
-        const m = ri(2, 4), n = ri(2, 3), p = ri(1, 5);
+        const m = ri(2, 4), n = ri(2, 3), p = ri(2, 5);
         return {
           q: `Simplifica: ${M(`(x^${m})^${n}*x^${p}`)}`, ans: expr(`x^${m * n + p}`, { form: ['simplePow'] }),
           traps: [T(`x^${m ** n + p}`, 'pot_pot', 'Potencia de potencia: <b>multiplica</b> exponentes.'), T(`x^${(m + n) + p}`, 'pot_pot', 'Primero (potencia de potencia) se multiplica, luego (producto) se suma.'), T(`x^${m * n * p}`, 'prod_pot', `Al final es un <b>producto</b>: ${M(`x^${m * n}*x^${p}`)} → se suman.`)],

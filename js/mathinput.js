@@ -227,8 +227,8 @@ const LAYOUTS = {
   ],
 };
 const LABEL = {
-  frac: '<span class="k-fr"><span>▫</span><span>▫</span></span>',
-  pow: '▫<sup>▫</sup>', sq: 'x<sup>2</sup>', cube: 'x<sup>3</sup>', sqrt: '√▫',
+  frac: '<span class="k-fr"><span>□</span><span>□</span></span>',
+  pow: '<span>□<sup>□</sup></span>', sq: '<span><i>x</i><sup>2</sup></span>', cube: '<span><i>x</i><sup>3</sup></span>', sqrt: '<span>√□</span>',
   ok: '✓',
 };
 
