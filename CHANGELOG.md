@@ -1,5 +1,11 @@
 # Registro de cambios
 
+## v1.0.2 — 17 nov 2026 · Operación inventada más explicada
+
+- **Por qué:** en 2★4 con a★b = (a + b)², el usuario respondió 20 (2² + 4²) y la app solo decía "No es la respuesta correcta". Es el mismo error del diagnóstico: (x+5)² → x² + 5².
+- Ahora la **operación inventada** explica paso a paso: qué significa la regla, el reemplazo con paréntesis, cada operación en orden y el resultado.
+- Detecta los errores típicos de cada regla: (a+b)² → a² + b², a² → 2a, (−3)² negativo, signos, orden invertido. Para (a+b)² muestra además el **cuadrado de áreas** con los dos rectángulos que faltaban.
+
 ## v1.0.0 — 16 nov 2026 · Primera versión
 
 **Qué se hizo y por qué**
