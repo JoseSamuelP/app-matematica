@@ -1,5 +1,15 @@
 # Registro de cambios
 
+## v1.1.0 — 17 nov 2026 · Banco del examen diagnóstico (60 preguntas)
+
+- **Por qué:** el usuario compartió el encargo `docs/ENCARGO_APP_MATEMATICA.md` y las capturas de la Evaluación Diagnóstica de ESAN (Álgebra, Aritmética y Geometría) para practicarlas cuanto antes.
+- **Nueva pestaña 📝 Examen** con las 60 preguntas (`js/bank_diag.js`). Al responder, cada una muestra en este orden: respuesta correcta → qué significa el concepto (desde cero) → pasos → comprobación → trampas (por qué cada opción incorrecta está mal). Si fallas, se destaca **tu** error.
+- **Modos:** seguir con las que faltan, repasar errores, práctica por tema (con % de aciertos) y **simulacro de 60** con cronómetro, sin ayuda y con nota final por sección.
+- **Glosario de símbolos** y **fórmulas clave** en tarjetas.
+- Las preguntas del banco aparecen también en el **entrenamiento diario** (≈15%), con prioridad para las no respondidas y las falladas.
+- Pregunta 18 (|2x − 3| = 5) transcrita de la captura del formulario. La 18 y el orden de opciones de la 33 se leyeron de capturas borrosas; está anotado en el banco.
+- Prueba nueva: `node tests/bank.test.mjs` verifica que las 60 estén bien formadas.
+
 ## v1.0.2 — 17 nov 2026 · Operación inventada más explicada
 
 - **Por qué:** en 2★4 con a★b = (a + b)², el usuario respondió 20 (2² + 4²) y la app solo decía "No es la respuesta correcta". Es el mismo error del diagnóstico: (x+5)² → x² + 5².

@@ -129,3 +129,10 @@ Ver `README.md` (estructura) y `CHANGELOG.md` (historial). Puntos clave para seg
 - Cada tema = `{id, name, mode, unit, lesson(), variants:[{id, w, errs, gen()}]}` en `js/topics_*.js`. `gen()` devuelve `{q, ans, traps, steps, viz}`; las `traps` son los errores típicos de la sección 4.
 - Al agregar un tema: añadirlo a `PATH`, a `sw.js` si es un archivo nuevo, y correr `node tests/generators.test.mjs`.
 - Subir `CACHE` en `sw.js` en cada actualización.
+
+## 11. Banco del examen diagnóstico (v1.1, 17 nov 2026)
+
+- El usuario rindió la **Evaluación Diagnóstica de Matemática de ESAN** (Google Forms, 60 preguntas: Álgebra 1–20, Aritmética 21–40, Geometría 41–60). El encargo completo está en `docs/ENCARGO_APP_MATEMATICA.md`.
+- Banco en `js/bank_diag.js`; pestaña **📝 Examen** en la app. Incluye temas fuera del sílabo PNU (logaritmos, binomio de Newton, conjuntos, conteo, probabilidad, trigonometría, geometría): el usuario quiere aprenderlos también.
+- También compartió la **Guía de ejercicios Semana 1** (magnitudes proporcionales, regla de tres, tanto por ciento, sucesivos, comerciales, variación porcentual, exponentes, polinomios, productos notables). Se resolvió en una página aparte. Errores de la clave encontrados: regla de tres 3 (39,9 L, no 3,9), sucesivos 6 (S/ 20, no 12), productos notables 7 (m², no m).
+- Pendiente sugerido: generadores para magnitudes DP/IP con potencias, descuentos sucesivos y variación de áreas/volúmenes (temas de la guía que la app aún no genera).
