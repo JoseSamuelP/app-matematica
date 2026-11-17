@@ -1,5 +1,18 @@
 # Registro de cambios
 
+## v1.2.0 — 17 nov 2026 · Aprender cada tema paso a paso (35 cursos)
+
+- **Por qué:** el usuario explicó que con solo las 60 preguntas no puede aprender: necesita una explicación y una enseñanza progresiva por tema, con muchas más preguntas.
+- **35 cursos** (`js/curso.js`), uno por cada tema del examen diagnóstico. Cada uno tiene:
+  1. **Lección desde cero** (qué significa, ejemplo de la vida real y error típico).
+  2. **Nivel 1 Fácil → Nivel 2 Medio → Nivel 3 Tipo examen**, con ejercicios infinitos generados al azar, pistas paso a paso y detección del error.
+  3. Se sube de nivel con **3 correctas seguidas** (con pista no cuenta para la racha). El tema queda **dominado** con 4 correctas en nivel examen.
+  4. En el nivel examen aparecen también las **preguntas reales** de ese tema.
+- Temas nuevos con generador propio: discriminante, logaritmos, binomio de Newton, inecuaciones, ecuaciones exponenciales, suma y producto de raíces, función inversa, conjuntos, valor absoluto, dominio, MCD/MCM, interés simple, progresiones, primos, factorial y conteo, probabilidad, media, ángulos de polígonos, ángulos, áreas, Pitágoras, volúmenes, trigonometría y geometría analítica. Los demás reutilizan los generadores de la ruta.
+- Orden sugerido: **Aritmética → Álgebra → Geometría**. El entrenamiento diario incluye ≈25% de ejercicios del curso en marcha.
+- La pestaña 📝 Examen muestra cada tema con su progreso (●●●) y una ficha con la lección y los niveles.
+- Prueba nueva: `node tests/curso.test.mjs` (≈26 000 ejercicios de los 35 cursos).
+
 ## v1.1.0 — 17 nov 2026 · Banco del examen diagnóstico (60 preguntas)
 
 - **Por qué:** el usuario compartió el encargo `docs/ENCARGO_APP_MATEMATICA.md` y las capturas de la Evaluación Diagnóstica de ESAN (Álgebra, Aritmética y Geometría) para practicarlas cuanto antes.
